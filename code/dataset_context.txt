@@ -1,0 +1,115 @@
+DATASET OVERVIEW
+
+This dataset contains order transaction records with associated customer, product, and financial details. It is structured as a table where each row represents an individual line item or order entry. Downstream data analysts should use this context to understand the available dimensions and measures for performing exploratory data analysis, aggregations, filtering, and predictive modeling.
+
+GENERAL ANALYSIS INSTRUCTIONS
+
+- Use the exact column names provided in the dataset when writing Python and Pandas code.
+- Always inspect the actual data types and missing values in the DataFrame using Pandas methods (e.g., `.info()`, `.head()`) before executing complex transformations or calculations.
+- Ensure all generated code is syntactically valid, robust, and avoids assuming unverified relationships or inventing nonexistent columns.
+
+__COLUMN__
+
+OrderNum
+- Data Type: int64
+- Unique Values: 4976
+- Description: Represents the unique identifier for each order. This column serves as the primary key or transaction identifier within the dataset and can be used to count or track individual orders.
+
+__COLUMN__
+
+OrderDate
+- Data Type: datetime64[us]
+- Unique Values: 729
+- Description: Represents the timestamp or date when the order was placed. This column can be used for time-series analysis, trend identification, and seasonal aggregations.
+
+__COLUMN__
+
+OrderType
+- Data Type: str
+- Unique Values: 2
+- Observed Categories: ['Wholesale', 'Retail']
+- Description: Indicates the channel or type of order. The observed values ('Wholesale' and 'Retail') represent business-to-business bulk transactions versus direct consumer purchases, allowing for segmentation by sales channel.
+
+__COLUMN__
+
+CustomerType
+- Data Type: str
+- Unique Values: 2
+- Observed Categories: ['Business', 'Individual']
+- Description: Categorizes the customer placing the order. The observed categories ('Business' and 'Individual') distinguish between corporate clients and retail consumers.
+
+__COLUMN__
+
+CustName
+- Data Type: str
+- Unique Values: 2342
+- Observed Categories: (List contains 2342 unique customer names, including examples such as 'Gusikowski Group', 'Spencer Educators', 'Schinner Inc.', etc.)
+- Description: Represents the name of the customer or company placing the order. This can be used for customer-level aggregations and identifying top buyers, though the list of unique values is extensive and partially shown.
+
+__COLUMN__
+
+CustCountry
+- Data Type: str
+- Unique Values: 7
+- Observed Categories: ['Morocco', 'Syria', 'Saudi Arabia', 'Algeria', 'Egypt', 'Kuwait', 'Iraq']
+- Description: Represents the country where the customer is located. The observed categories provide geographic dimensions for regional sales performance analysis.
+
+__COLUMN__
+
+CustCity
+- Data Type: str
+- Unique Values: 1165
+- Observed Categories: (List contains 1165 unique city names across the customer countries, including examples such as 'Douar Oulad Amer Leqliaa', 'Jindayris', 'Ksar Lmajaz', etc.)
+- Description: Specifies the city corresponding to the customer's location, enabling granular geographic analysis within the specified countries. The list of unique values is extensive.
+
+__COLUMN__
+
+ProdCategory
+- Data Type: str
+- Unique Values: 7
+- Observed Categories: ['Blueprints', 'Drone Kits', 'Training Videos', 'Robot Kits', 'eBooks', 'Drones', 'Robots']
+- Description: Categorizes the product being purchased into broad merchandise groups. The observed categories ('Blueprints', 'Drone Kits', 'Training Videos', 'Robot Kits', 'eBooks', 'Drones', 'Robots') allow for category-level sales and performance comparisons.
+
+__COLUMN__
+
+ProdNumber
+- Data Type: str
+- Unique Values: 65
+- Observed Categories: ['BP102', 'DK204', 'TV801', 'RK602', 'EB502', 'DS302', 'TV803', 'DS306', 'EB507', 'BP104', 'TV812', 'TV802', 'EB509', 'TV811', 'TV810', 'RK603', 'DK209', 'EB521', 'BP106', 'BP108', 'RS707', 'DK201', 'TV806', 'DK206', 'DS301', 'EB514', 'EB513', 'BP101', 'RK606', 'DS307', 'RK605', 'TV808', 'BP107', 'TV804', 'BP105', 'TV813', 'RS702', 'DS303', 'TV809', 'DK203', 'EB520', 'BP109', 'EB517', 'EB516', 'EB503', 'TV805', 'DS305', 'BP110', 'EB511', 'EB505', 'EB506', 'EB508', 'EB501', 'EB518', 'TV807', 'DK208', 'RS705', 'EB512', 'RK607', 'RS703', 'EB519', 'RS706', 'EB504', 'DK202', 'RS704']
+- Description: Represents the unique product code or SKU identifier for the item sold. Analysts can use this column to track specific product performance.
+
+__COLUMN__
+
+ProdName
+- Data Type: str
+- Unique Values: 66
+- Observed Categories: ['Bsquare Robot Blueprint', 'BYOD-300', 'Aerial Security', 'BYOR-1000', 'Building Your First Robot', 'DC-304 Drone', 'Cloud Computing', 'DX-145 Drone', 'Drone Building Essentials', 'Cat Robot Blueprint', ...] (List is representative of the 66 unique product names)
+- Description: Represents the descriptive name of the product associated with the `ProdNumber`. This provides qualitative context for the items sold in each order.
+
+__COLUMN__
+
+Quantity
+- Data Type: int64
+- Unique Values: 109
+- Description: Represents the numerical quantity of the product ordered in a given transaction. This is a primary measure for volume-based calculations and sales analysis.
+
+__COLUMN__
+
+Price
+- Data Type: float64
+- Unique Values: 58
+- Description: Represents the unit price of the product. This numerical measure can be multiplied by `Quantity` and adjusted for `Discount` to calculate revenue.
+
+__COLUMN__
+
+Discount
+- Data Type: str or float64 (metadata indicates float64)
+- Unique Values: 59
+- Description: Represents the discount applied to the order item. Analysts should inspect whether this value represents a percentage or a fixed monetary deduction before performing financial computations.
+
+__COLUMN__
+
+Total Cost
+- Data Type: float64
+- Unique Values: 1217
+- Description: Represents the total financial amount for the line item (often corresponding to net sales or total cost after pricing rules and quantities). Analysts should verify its exact calculation relative to `Quantity`, `Price`, and `Discount`.
